@@ -1,0 +1,3 @@
+{'email': 'kimberly36@example.org', 'name': 'user_b06089fe-7765-4837-a3e4-aae012547aec', 'password': 'FekZl6Oa+Y'}
+<Response [200]>
+{'success': False, 'message': 'You should be authorised'}

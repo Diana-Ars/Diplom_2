@@ -1,0 +1,2 @@
+{'email': 'lindanelson@example.org', 'name': 'user_534770cf-8d62-4dbf-8767-af2488abe0f1', 'password': '!J3@Y1ojIz'}
+<Response [200]>
