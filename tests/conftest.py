@@ -20,9 +20,7 @@ def auth_user():
     user_data = generate_user_body()
     UserMethods.create_user(user_data)
     user = {'email': user_data['email'], 'name': user_data['name'], 'password': user_data['password']}
-    time.sleep(2)      # необходимо ожидание, так как при частом запросе сервера возвращается ошибка
     response = UserMethods.login_user(email=user['email'], password=user['password'])
-    time.sleep(2)      # необходимо ожидание, так как при частом запросе сервера возвращается ошибка
     if response.status_code != 200:
         pytest.fail(f"Ошибка при логине: {response.status_code}")
     token = response.json().get('accessToken')

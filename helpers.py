@@ -6,7 +6,7 @@ fake = Faker()
 def generate_user_body():
     unique_login = str(uuid.uuid4())
     return {
-        "email":fake.unique.email(),
+        "email": f"test_{unique_login}@{fake.domain_name()}",
         "password":fake.password(),
         "name":f"user_{unique_login}"
     }
