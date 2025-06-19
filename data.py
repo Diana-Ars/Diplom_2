@@ -12,3 +12,4 @@ class Data:
         'ingredients': []
     }
     fake_hash_order_body = {'ingredients': ['6666666666666aaaaaaaaa']}
+

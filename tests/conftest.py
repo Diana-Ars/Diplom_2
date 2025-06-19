@@ -4,6 +4,7 @@ from user_methods import UserMethods
 from order_methods import OrderMethods
 from data import *
 import random
+import time
 
 
 @pytest.fixture
@@ -19,9 +20,9 @@ def auth_user():
     user_data = generate_user_body()
     UserMethods.create_user(user_data)
     user = {'email': user_data['email'], 'name': user_data['name'], 'password': user_data['password']}
-    print(user)
+    time.sleep(2)      # необходимо ожидание, так как при частом запросе сервера возвращается ошибка
     response = UserMethods.login_user(email=user['email'], password=user['password'])
-    print(response)
+    time.sleep(2)      # необходимо ожидание, так как при частом запросе сервера возвращается ошибка
     if response.status_code != 200:
         pytest.fail(f"Ошибка при логине: {response.status_code}")
     token = response.json().get('accessToken')
@@ -72,9 +73,7 @@ def auth_user_with_refresh_token():
     user_data = generate_user_body()
     UserMethods.create_user(user_data)
     user = {'email': user_data['email'], 'name': user_data['name'], 'password': user_data['password']}
-    print(user)
     response = UserMethods.login_user(email=user['email'], password=user['password'])
-    print(response)
     token = response.json().get('accessToken')
     refresh_token = response.json().get('refreshToken')
     if response.status_code == 200 and token:

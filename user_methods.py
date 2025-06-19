@@ -32,3 +32,4 @@ class UserMethods:
     @staticmethod
     def refresh_token(body):
         return requests.post(f'{Url.TOKEN}', json=body)
+

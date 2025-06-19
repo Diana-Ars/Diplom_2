@@ -6,3 +6,4 @@ class Url:
     INFO_USER = f'{BASE_URL}/auth/user'
     DELETE_USER = f'{BASE_URL}/auth'
     TOKEN = f'{BASE_URL}/auth/token'
+

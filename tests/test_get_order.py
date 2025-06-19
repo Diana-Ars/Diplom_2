@@ -12,7 +12,7 @@ class TestGetOrder:
         assert response.status_code == 200 and response.json()['success'] == True
         assert response.json()['total'] == 1
 
-    @allure.title('Проверка успешного получения списка из 50 заказов')
+    @allure.title('Проверка успешного получения списка из 50 заказов')  #из-за большого количества создаваемых заказов, тест долгий
     def test_success_get_50_orders_by_user(self, auth_user_and_create_50_orders):
         with allure.step('Получение списка заказов'):
             response = OrderMethods.get_order_by_user(auth_user_and_create_50_orders['auth_user']['headers'])
@@ -24,5 +24,4 @@ class TestGetOrder:
         with allure.step('Получение списка заказов'):
             response = OrderMethods.get_order_by_user({'Authorization': ''})
         assert response.status_code == 401 and response.json()['success'] == False
-        print(response.json())
 
