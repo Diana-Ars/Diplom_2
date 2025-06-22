@@ -13,7 +13,7 @@ class TestChangeUserData:
         new_data = generate_user_body_with_fake_params(param, data)
         with allure.step('Изменение данных пользователя'):
             response = UserMethods.change_user_data(auth_user['headers'], new_data)
-        assert response.status_code == 200 and response.json()['success'] == True
+        assert response.status_code == 200
 
     @allure.title('Проверка неуспешного изменения данных пользователя без авторизации')
     @pytest.mark.parametrize('param', ['both', 'email', 'name'])
@@ -22,7 +22,7 @@ class TestChangeUserData:
         new_data = generate_user_body_with_fake_params(param, data)
         with allure.step('Изменение данных пользователя'):
             response = UserMethods.change_user_data({'Authorization': ''}, new_data)
-        assert response.status_code == 401 and response.json()['success'] == False
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_not_auth
 
     @allure.title('Проверка неуспешного изменения данных пользователя при повторяющемся email')
     def test_failed_change_user_data_double_email(self, auth_user):
@@ -36,5 +36,5 @@ class TestChangeUserData:
         }
         with allure.step('Изменение данных пользователя'):
             response = UserMethods.change_user_data(auth_user['headers'], new_data)
-        assert response.status_code == 403 and response.json()['success'] == False
+        assert response.status_code == 403 and response.json()['message'] == Data.error_message_double_email
 

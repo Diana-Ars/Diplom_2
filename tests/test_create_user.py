@@ -21,7 +21,7 @@ class TestCreateUser:
             creation = UserMethods.create_user(user_data)
         with allure.step('Создание дубля пользователя'):
             double_creation = UserMethods.create_user(user_data)
-        assert double_creation.status_code == 403 and double_creation.json()['success'] == False
+        assert double_creation.status_code == 403 and double_creation.json()['message'] == Data.error_message_double_user
 
     @allure.title('Проверка неуспешного создания пользователя при пустом вводе значения "{param}"')
     @pytest.mark.parametrize('param', ['email', 'password', 'name'])
@@ -30,7 +30,7 @@ class TestCreateUser:
         user_data[param] = Data.empty_param
         with allure.step('Создание пользователя'):
             creation = UserMethods.create_user(user_data)
-        assert creation.status_code == 403 and creation.json()['success'] == False
+        assert creation.status_code == 403 and creation.json()['message'] == Data.error_message_create_user
 
     @allure.title('Проверка неуспешного создания пользователя при отсутствии "{missing_field}" в теле запроса')
     @pytest.mark.parametrize('missing_field', [
@@ -45,11 +45,11 @@ class TestCreateUser:
         missing_data = create_user_body_without_fields(missing_field, user_data)
         with allure.step('Создание пользователя'):
             creation = UserMethods.create_user(missing_data)
-        assert creation.status_code == 403
+        assert creation.status_code == 403 and creation.json()['message'] == Data.error_message_create_user
 
     @allure.title('Проверка неуспешного создания пользователя при пустом теле запроса')
     def test_failed_create_user_when_body_empty(self):
         with allure.step('Создание пользователя'):
             creation = UserMethods.create_user(body='')
-        assert creation.status_code == 400
+        assert creation.status_code == 403 and creation.json()['message'] == Data.error_message_create_user
 

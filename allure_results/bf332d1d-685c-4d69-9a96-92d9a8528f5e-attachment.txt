@@ -1,2 +1,0 @@
-{'email': 'tracy22@example.com', 'name': 'user_90cf224a-4387-428e-8aba-0b3a7c763a27', 'password': '%t8HYJy#kf'}
-<Response [200]>

@@ -43,7 +43,7 @@ def create_fix_user():
     user_data['email'] = 'fix_email@email.com'
     UserMethods.create_user(user_data)
     user = {'email': user_data['email'], 'name': user_data['name'], 'password':user_data['password']}
-    yield user
+    return user
 
 
 @pytest.fixture

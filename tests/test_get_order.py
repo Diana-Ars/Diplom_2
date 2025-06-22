@@ -2,6 +2,7 @@ import pytest
 import allure
 
 from order_methods import OrderMethods
+from data import *
 
 
 class TestGetOrder:
@@ -23,5 +24,5 @@ class TestGetOrder:
     def test_failed_get_order_without_login(self, auth_user_and_create_order):
         with allure.step('Получение списка заказов'):
             response = OrderMethods.get_order_by_user({'Authorization': ''})
-        assert response.status_code == 401 and response.json()['success'] == False
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_not_auth
 

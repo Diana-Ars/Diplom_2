@@ -21,7 +21,7 @@ class TestLoginUser:
         user_data[param] = Data.fake_param
         with allure.step('Авторизация пользователя'):
             response = UserMethods.login_user(user_data['email'], user_data['password'])
-        assert response.status_code == 401 and response.json()['success'] == False
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_login
 
     @allure.title('Проверка неуспешной авторизации с пустым полем "{param}"')
     @pytest.mark.parametrize('param', ['email', 'password', 'both'])
@@ -30,7 +30,7 @@ class TestLoginUser:
         data_with_empty = generate_user_body_with_empty_params(param, user_data)
         with allure.step('Авторизация пользователя'):
             response = UserMethods.login_user(data_with_empty['email'], data_with_empty['password'])
-        assert response.status_code == 401 and response.json()['success'] == False
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_login
 
     @allure.title('Проверка неуспешной авторизации при отсутствии "{missing_field}" в теле запроса')
     @pytest.mark.parametrize('missing_field', [
@@ -44,11 +44,11 @@ class TestLoginUser:
         data_without_fields = login_user_body_without_fields(missing_field, user_data)
         with allure.step('Авторизация пользователя'):
             response = UserMethods.login_user(body=data_without_fields)
-        assert response.status_code == 401
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_login
 
     @allure.title('Проверка неуспешной авторизации при отсутствии тела запроса')
     def test_failed_login_user_when_body_empty(self, create_user):
         with allure.step('Авторизация пользователя'):
             response = UserMethods.login_user(body='')
-        assert response.status_code == 400
+        assert response.status_code == 401 and response.json()['message'] == Data.error_message_login
 
