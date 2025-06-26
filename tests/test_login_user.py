@@ -12,7 +12,7 @@ class TestLoginUser:
         user = create_user
         with allure.step('Авторизация пользователя'):
             response = UserMethods.login_user(email=user['email'], password=user['password'])
-        assert response.status_code == 200 and response.json()['success'] == True
+        assert response.status_code == 200 and response.json()['success']
 
     @allure.title('Проверка неуспешной авторизации с несуществующим "{param}"')
     @pytest.mark.parametrize('param', ['email', 'password'])

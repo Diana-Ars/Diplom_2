@@ -19,3 +19,4 @@ class Data:
     error_message_login = 'email or password are incorrect'
     error_message_create_order = 'Ingredient ids must be provided'
     error_message_double_email = 'User with such email already exists'
+

@@ -12,7 +12,7 @@ class TestCreateUser:
         user_data = generate_user_body()
         with allure.step('Создание пользователя'):
             creation = UserMethods.create_user(user_data)
-        assert creation.status_code == 200 and creation.json()['success'] == True
+        assert creation.status_code == 200 and creation.json()['success']
 
     @allure.title('Проверка неуспешного создания пользователя при создании дубля')
     def test_failed_create_user_double(self):

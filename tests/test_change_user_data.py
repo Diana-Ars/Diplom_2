@@ -13,7 +13,7 @@ class TestChangeUserData:
         new_data = generate_user_body_with_fake_params(param, data)
         with allure.step('Изменение данных пользователя'):
             response = UserMethods.change_user_data(auth_user['headers'], new_data)
-        assert response.status_code == 200
+        assert response.status_code == 200 and response.json()['success']
 
     @allure.title('Проверка неуспешного изменения данных пользователя без авторизации')
     @pytest.mark.parametrize('param', ['both', 'email', 'name'])
